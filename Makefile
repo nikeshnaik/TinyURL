@@ -1,5 +1,5 @@
 typehint:
-	mypy data/ tinyurl
+	pytype .
 
 formatter:
 	python -m black ./
