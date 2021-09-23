@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import uuid4
 
 from sqlalchemy import (
     Column,
@@ -24,36 +25,32 @@ class URL(Base):
     UserID = Column(Integer, ForeignKey("users.UserID"))
 
     def __repr__(self):
-        return (
-            "<User(UserID='%s', EncodedURL='%s', OriginalURL='%s', CreationDate='%s', ExpirationDate='%s')>"
-            % (
-                self.UserID,
-                self.EncodedURL,
-                self.OriginalURL,
-                str(self.CreationDate),
-                str(self.ExpirationDate),
-            )
+        return "<URL(UserID='%s', EncodedURL='%s', OriginalURL='%s', CreationDate='%s', ExpirationDate='%s')>" % (
+            self.UserID,
+            self.EncodedURL,
+            self.OriginalURL,
+            str(self.CreationDate),
+            str(self.ExpirationDate),
         )
 
 
 class USERS(Base):
     __tablename__ = "users"
-    UserID = Column(Integer, primary_key=True)
-    Name = Column(String)
-    Email = Column(String)
+    UserID = Column(Integer, primary_key=True, autoincrement="auto")
+    Name = Column(String, nullable=False)
+    Email = Column(String, unique=True, nullable=False)
+    ApiDevKey = Column(String)
     CreationDate = Column(DateTime)
     LastLogin = Column(DateTime)
 
     def __repr__(self):
-        return (
-            "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s')>"
-            % (
-                self.UserID,
-                self.Name,
-                self.Email,
-                str(self.CreationDate),
-                str(self.LastLogin),
-            )
+        return "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s', ApidevKey='%s')>" % (
+            self.UserID,
+            self.Name,
+            self.Email,
+            str(self.CreationDate),
+            str(self.LastLogin),
+            self.ApiDevKey,
         )
 
 
@@ -80,6 +77,7 @@ if __name__ == "__main__":
         Email="john.doe@xmen.com",
         CreationDate=datetime.today(),
         LastLogin=datetime.now(),
+        ApiDevKey=str(uuid4()),
     )
     # print(one_user)
     session.add(one_user)
