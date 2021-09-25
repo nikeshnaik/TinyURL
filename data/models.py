@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import uuid4
 
+from dateutil.relativedelta import relativedelta
 from sqlalchemy import (
     Column,
     DateTime,
@@ -18,10 +19,12 @@ Base = declarative_base()
 
 class URL(Base):
     __tablename__ = "url"
-    EncodedURL = Column(String, primary_key=True)
+    EncodedURL = Column(String, primary_key=True, unique=True, nullable=False)
     OriginalURL = Column(String)
-    CreationDate = Column(DateTime)
-    ExpirationDate = Column(DateTime)
+    CreationDate = Column(DateTime, default=datetime.utcnow)
+    ExpirationDate = Column(
+        DateTime, default=lambda: datetime.utcnow() + relativedelta(years=2)
+    )
     UserID = Column(Integer, ForeignKey("users.UserID"))
 
     def __repr__(self):
@@ -39,9 +42,9 @@ class USERS(Base):
     UserID = Column(Integer, primary_key=True, autoincrement="auto")
     Name = Column(String, nullable=False)
     Email = Column(String, unique=True, nullable=False)
-    ApiDevKey = Column(String)
-    CreationDate = Column(DateTime)
-    LastLogin = Column(DateTime)
+    ApiDevKey = Column(String, unique=True, default=lambda: str(uuid4()))
+    CreationDate = Column(DateTime, default=datetime.utcnow)
+    LastLogin = Column(DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s', ApidevKey='%s')>" % (
@@ -60,7 +63,7 @@ if __name__ == "__main__":
     engine = create_engine("sqlite:///./data/TinyURL.sqlite")
     session = sessionmaker()
     session.configure(bind=engine)
-    Base.metadata.create_all(engine)
+    # Base.metadata.create_all(engine)
 
     ## Insertions
     session = session()
@@ -80,9 +83,9 @@ if __name__ == "__main__":
         ApiDevKey=str(uuid4()),
     )
     # print(one_user)
-    session.add(one_user)
-    session.add(one_url)
-    session.commit()
+    # session.add(one_user)
+    # session.add(one_url)
+    # session.commit()
 
     for row in session.query(URL).order_by(URL.EncodedURL):
         print(row)

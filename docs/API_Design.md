@@ -21,16 +21,15 @@ API Design
 
  - Create User Endpoint
 	 - Request Body
-		 - userid, name, email
-		 - auto generate api_dev_key using uuid4
-		 - auto generate user creation date using datetime object
-		 - set lastlogin as creation date using datetime object
+		 - name, 
+		 - email
+		 - auto generate user creation date using datetime object by SQL
+		 - set lastlogin as creation date using datetime object by default
 	  ```
 	  POST Method
 	  /v1/user
 	  
 		{
-			"userid": "john_001",
 			"name": "John Doe",
 			"email": "johndoe@gmail.com"
 		}
@@ -38,7 +37,7 @@ API Design
 	  ```
 		 
 	 - Process
-		 - Perform sanity check on userid duplication, already registered account
+		 - Check if name or email exist then raise error
 		 - insert into database
 
 	 - Response Body
@@ -80,9 +79,8 @@ API Design
 	
  - Create TinyURL
 	 - Request Body
-		 - api-dev-key, original url, expiry date
-		 - auto generate creation date
-		 - if expiry date not given set to 2 years from now
+		 - api-dev-key, original url, expiry date[optional]
+
 		
 		```
 		POST Method
@@ -113,7 +111,7 @@ API Design
 	 ```
 	 GET Method
 	 /{shortkey}
-	  shortkey = encode key from original url
+	  shortkey = encoded key from original url
 
 	 ```
 	 - Process
@@ -137,7 +135,7 @@ API Design
 			"key": "sadf211",
 			"api-dev-key": "UUID('ce7f084b-cae8-4679-a3c1-2273424b413b')"
 		}
-
+	
 	```
 	 - Request URL
 		 - tiny_url, api-dev-key
