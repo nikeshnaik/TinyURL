@@ -128,15 +128,17 @@ API Design
 		}
 	```
  - Delete TinyURL
-		```
-			DELETE Method
-			/v1/delete-tinyurl
-			{
-				"key": "sadf211",
-				"api-dev-key": "UUID('ce7f084b-cae8-4679-a3c1-2273424b413b')"
-			}
-			
-		```
+		
+	```
+		DELETE Method
+		/v1/delete-tinyurl
+
+		{
+			"key": "sadf211",
+			"api-dev-key": "UUID('ce7f084b-cae8-4679-a3c1-2273424b413b')"
+		}
+
+	```
 	 - Request URL
 		 - tiny_url, api-dev-key
 	 - Process
