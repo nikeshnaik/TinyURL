@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import uuid1
 
 from hashids import Hashids
 
@@ -13,7 +14,7 @@ def get_username_id(api_dev_key: str) -> USERS:
     db_session = SQLiteSession().connection_string
     record = db_session.query(USERS).filter(USERS.ApiDevKey == api_dev_key).all()
     if not record:
-        ValueError("Api Dev Key Record not Found")
+        raise ValueError("Api Dev Key Record not Found")
 
     return record[0]
 

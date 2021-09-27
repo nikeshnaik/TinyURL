@@ -25,10 +25,12 @@ Database Schema
 ![TinyURL DB Schema v1_2_.jpeg](./assets/TinyURL_DB_Schema_v1.jpeg)
 
 
-- UserID will have 1:N relationship between Users Table and URLs Table 
+- UserID will have 1:N relationship between Users Table and URLs Table
+- UserID auto-increment
+- Date Field auto generate using datetime object
+- api-dev-key also auto-generate using default lambda function
 - Users Table can have different user details
-- API dev key will generated using uuid which will help in creating keys.
-- New Keys will be dumped to UsedKey Table
+- API dev key will generated using uuid which will help in creating keys ,unique api_dev_key constraint set by db
 
 
 ##### User Query After login:
