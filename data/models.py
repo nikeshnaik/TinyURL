@@ -28,12 +28,15 @@ class URL(Base):
     UserID = Column(Integer, ForeignKey("users.UserID"))
 
     def __repr__(self):
-        return "<URL(UserID='%s', EncodedURL='%s', OriginalURL='%s', CreationDate='%s', ExpirationDate='%s')>" % (
-            self.UserID,
-            self.EncodedURL,
-            self.OriginalURL,
-            str(self.CreationDate),
-            str(self.ExpirationDate),
+        return (
+            "<URL(UserID='%s', EncodedURL='%s', OriginalURL='%s', CreationDate='%s', ExpirationDate='%s')>"
+            % (
+                self.UserID,
+                self.EncodedURL,
+                self.OriginalURL,
+                str(self.CreationDate),
+                str(self.ExpirationDate),
+            )
         )
 
 
@@ -47,13 +50,16 @@ class USERS(Base):
     LastLogin = Column(DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s', ApidevKey='%s')>" % (
-            self.UserID,
-            self.Name,
-            self.Email,
-            str(self.CreationDate),
-            str(self.LastLogin),
-            self.ApiDevKey,
+        return (
+            "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s', ApidevKey='%s')>"
+            % (
+                self.UserID,
+                self.Name,
+                self.Email,
+                str(self.CreationDate),
+                str(self.LastLogin),
+                self.ApiDevKey,
+            )
         )
 
 
@@ -68,20 +74,10 @@ if __name__ == "__main__":
     ## Insertions
     session = session()
     one_url = URL(
-        EncodedURL="asdfae2",
-        OriginalURL="https://www.hello.com",
-        CreationDate=datetime.today(),
-        ExpirationDate=datetime.today(),
-        UserID=1412,
+        EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
     )
-    one_user = USERS(
-        UserID=1412,
-        Name="John Doe",
-        Email="john.doe@xmen.com",
-        CreationDate=datetime.today(),
-        LastLogin=datetime.now(),
-        ApiDevKey=str(uuid4()),
-    )
+    one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
+
     # print(one_user)
     # session.add(one_user)
     # session.add(one_url)

@@ -3,10 +3,11 @@ from typing import Optional
 from uuid import UUID, uuid4
 
 from dateutil.relativedelta import relativedelta
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from pydantic import BaseModel, Field  # type: ignore
 
 from tinyurl.keygen import generate_short_key
+from tinyurl.logging import turl_logger
 
 app = FastAPI()
 
@@ -34,11 +35,15 @@ class DeleteURL(BaseModel):
 
 @app.post("/v1/encode-url")
 def create_tinyurl(request: CreateTinyURL):
-    print(request)
     ## encapsulate this inside a module and its database connection
+    print("Error", request)
 
     unique_key = generate_short_key(request.api_dev_key, request.original_url)
     # ToDo: Dump it to DB.
+    print(unique_key)
+    turl_logger.info(
+        msg="Request Processed", extra={**request.dict(), "response_code": 200}
+    )
     return unique_key
 
 
