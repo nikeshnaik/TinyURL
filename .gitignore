@@ -130,3 +130,7 @@ dmypy.json
 
 #Sqllite
 /data/*.sqlite
+
+
+##log
+turl.log

@@ -12,10 +12,10 @@ MIN_LENGTH = 8
 def get_username_id(api_dev_key: str) -> USERS:
 
     db_session = SQLiteSession().connection_string
-    record = db_session.query(USERS).filter(USERS.ApiDevKey == api_dev_key).all()
+    record = db_session.query(USERS).all()
+    db_session.close()
     if not record:
         raise ValueError("Api Dev Key Record not Found")
-
     return record[0]
 
 
