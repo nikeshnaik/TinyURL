@@ -2,14 +2,20 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
 
+import uvicorn
 from dateutil.relativedelta import relativedelta
 from fastapi import Depends, FastAPI
+from fastapi.requests import Request
+from fastapi.responses import JSONResponse
+from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
+from tinyurl.exception_handling import ExceptionRoute
 from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
 app = FastAPI()
+router = APIRouter(route_class=ExceptionRoute)
 
 
 class CreateUser(BaseModel):
@@ -33,44 +39,53 @@ class DeleteURL(BaseModel):
     encoded_key: str
 
 
-@app.post("/v1/encode-url")
+@router.post("/v1/encode-url")
 def create_tinyurl(request: CreateTinyURL):
-    ## encapsulate this inside a module and its database connection
-    print("Error", request)
-
+    # try:
     unique_key = generate_short_key(request.api_dev_key, request.original_url)
-    # ToDo: Dump it to DB.
-    print(unique_key)
     turl_logger.info(
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
+    # except AppError as e:
+    #     turl_logger.error(msg=e.detail, extra={**request.dict(), "response_code":e.status_code})
+    #     raise
+
     return unique_key
 
 
-@app.delete("/v1/delete-url")
+@router.delete("/v1/delete-url")
 def delete_url(request: DeleteURL):
     print(request)
     ## seperate module
     return {"Confirmed": False}
 
 
-@app.post("/v1/create-user")
+@router.post("/v1/create-user")
 def create_user(request: CreateUser):
     print(request)
     ## seperate module
     return {"Confirmed": request}
 
 
-@app.post("/v1/delete-user")
+@router.post("/v1/delete-user")
 def delete_user(request: DeleteUser):
     print(request)
     ## seperate module
     return {"Confirmed": request}
 
 
-@app.get("/{shortkey}")
+@router.get("/{shortkey}")
 def read_tinyurl(shortkey: str):
     print(shortkey)
     ## seperate module
     ##ToDo
     return {"Confirmed": "Redirecting to original link"}
+
+
+app.include_router(router)
+
+
+if __name__ == "__main__":
+    uvicorn.run(
+        app, host="0.0.0.0", port=5000, debug=True, reload=False, log_level="info"
+    )

@@ -11,7 +11,7 @@ handlers:
     stream: ext://sys.stdout
   file:
     class: logging.handlers.TimedRotatingFileHandler
-    level: ERROR
+    level: INFO
     formatter: default
     filename: turl.log
     backupCount: 4

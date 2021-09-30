@@ -28,15 +28,12 @@ class URL(Base):
     UserID = Column(Integer, ForeignKey("users.UserID"))
 
     def __repr__(self):
-        return (
-            "<URL(UserID='%s', EncodedURL='%s', OriginalURL='%s', CreationDate='%s', ExpirationDate='%s')>"
-            % (
-                self.UserID,
-                self.EncodedURL,
-                self.OriginalURL,
-                str(self.CreationDate),
-                str(self.ExpirationDate),
-            )
+        return "<URL(UserID='%s', EncodedURL='%s', OriginalURL='%s', CreationDate='%s', ExpirationDate='%s')>" % (
+            self.UserID,
+            self.EncodedURL,
+            self.OriginalURL,
+            str(self.CreationDate),
+            str(self.ExpirationDate),
         )
 
 
@@ -50,16 +47,13 @@ class USERS(Base):
     LastLogin = Column(DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return (
-            "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s', ApidevKey='%s')>"
-            % (
-                self.UserID,
-                self.Name,
-                self.Email,
-                str(self.CreationDate),
-                str(self.LastLogin),
-                self.ApiDevKey,
-            )
+        return "<User(UserID='%s', Name='%s', Email='%s', CreationDate='%s', LastLogin='%s', ApidevKey='%s')>" % (
+            self.UserID,
+            self.Name,
+            self.Email,
+            str(self.CreationDate),
+            str(self.LastLogin),
+            self.ApiDevKey,
         )
 
 
