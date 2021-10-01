@@ -1,10 +1,13 @@
 from typing import Optional
 from uuid import uuid1
 
+from fastapi import HTTPException
 from hashids import Hashids
 
 from data.database import SQLiteSession
 from data.models import URL, USERS
+from tinyurl.exception_handling import DataError
+from tinyurl.logging import turl_logger
 
 MIN_LENGTH = 8
 
@@ -14,15 +17,16 @@ def get_username_id(api_dev_key: str) -> USERS:
     db_session = SQLiteSession().connection_string
     record = db_session.query(USERS).all()
     db_session.close()
-    if not record:
-        raise ValueError("Api Dev Key Record not Found")
+    if record:
+        raise DataError(detail="Api Dev Key Not found")
+
     return record[0]
 
 
 def generate_short_key(api_dev_key: str, original_url: str) -> str:
 
     if not api_dev_key or not original_url:
-        raise ValueError("Expected api_dev_key or Original URL to be not None")
+        raise DataError(detail="Expected api_dev_key or Original URL to be not None")
 
     salt = api_dev_key + original_url
 
