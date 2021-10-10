@@ -20,7 +20,7 @@ Base = declarative_base()
 class URL(Base):
     __tablename__ = "url"
     EncodedURL = Column(String, primary_key=True, unique=True, nullable=False)
-    OriginalURL = Column(String)
+    OriginalURL = Column(String, unique=True)
     CreationDate = Column(DateTime, default=datetime.utcnow)
     ExpirationDate = Column(
         DateTime, default=lambda: datetime.utcnow() + relativedelta(years=2)
@@ -64,13 +64,13 @@ if __name__ == "__main__":
     session = sessionmaker()
     session.configure(bind=engine)
     # Base.metadata.create_all(engine)
-
+    #
     ## Insertions
     session = session()
-    one_url = URL(
-        EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
-    )
-    one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
+    # one_url = URL(
+    # EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
+    # )
+    # one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
 
     # print(one_user)
     # session.add(one_user)

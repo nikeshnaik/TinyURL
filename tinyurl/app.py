@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
+from tinyurl.delete_url import delete_encoded_url
 from tinyurl.exception_handling import ExceptionRoute
 from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
@@ -41,23 +42,21 @@ class DeleteURL(BaseModel):
 
 @router.post("/v1/encode-url")
 def create_tinyurl(request: CreateTinyURL):
-    # try:
     unique_key = generate_short_key(request.api_dev_key, request.original_url)
     turl_logger.info(
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
-    # except AppError as e:
-    #     turl_logger.error(msg=e.detail, extra={**request.dict(), "response_code":e.status_code})
-    #     raise
 
-    return unique_key
+    return {"msg": f"Resource Created {unique_key}"}
 
 
 @router.delete("/v1/delete-url")
 def delete_url(request: DeleteURL):
-    print(request)
-    ## seperate module
-    return {"Confirmed": False}
+    record_deleted = delete_encoded_url(request.api_dev_key, request.encoded_key)
+    turl_logger.info(
+        msg="Request Processed", extra={**request.dict(), "response_code": 200}
+    )
+    return {"msg": f"Resource Deleted {record_deleted}"}
 
 
 @router.post("/v1/create-user")

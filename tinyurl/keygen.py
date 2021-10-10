@@ -1,5 +1,5 @@
+import random
 from typing import Optional
-from uuid import uuid1
 
 from fastapi import HTTPException
 from hashids import Hashids
@@ -15,26 +15,40 @@ MIN_LENGTH = 8
 def get_username_id(api_dev_key: str) -> USERS:
 
     db_session = SQLiteSession().connection_string
-    record = db_session.query(USERS).all()
+    record = db_session.query(USERS).filter(api_dev_key == api_dev_key).all()
     db_session.close()
-    if record:
+    if not record:
         raise DataError(detail="Api Dev Key Not found")
 
     return record[0]
 
 
-def generate_short_key(api_dev_key: str, original_url: str) -> str:
+def dump_to_database(user_id: str, unique_key: str, original_url: str) -> bool:
 
+    db_session = SQLiteSession().connection_string
+    one_url = URL(EncodedURL=unique_key, OriginalURL=original_url, UserID=user_id)
+    db_session.add(one_url)
+    db_session.commit()
+
+    return True
+
+
+def generate_short_key(api_dev_key: str, original_url: str) -> str:
+    print(api_dev_key, original_url)
     if not api_dev_key or not original_url:
         raise DataError(detail="Expected api_dev_key or Original URL to be not None")
 
-    salt = api_dev_key + original_url
+    salt = api_dev_key + str(random.randint(1, 100000000))
+    print(salt)
 
-    hashid_obj = Hashids(salt=salt, min_length=MIN_LENGTH)
+    hashid_object = Hashids(salt=salt, min_length=MIN_LENGTH)
 
     user_object = get_username_id(api_dev_key=api_dev_key)
 
-    unique_key = hashid_obj.encode(user_object.UserID)
+    unique_key = hashid_object.encode(user_object.UserID)
+    print(unique_key)
+
+    dump_to_db = dump_to_database(user_object.UserID, unique_key, original_url)
 
     return unique_key
 

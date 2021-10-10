@@ -28,17 +28,22 @@ class ExceptionRoute(APIRoute):
         async def custom_route_handler(request: Request):
             try:
                 response: Response = await original_route_handler(request)
+                return response
             except Exception as err:
                 if isinstance(err, DataError):
                     turl_logger.error(
-                        msg=err.detail, extra={"response_code": err.status_code}
+                        msg=err.detail,
+                        stack_info=True,
+                        extra={"response_code": err.status_code},
                     )
                     return JSONResponse(
                         content="Data Error: " + err.detail, status_code=err.status_code
                     )
                 ## Add if any specific exception class needed.
                 else:
-                    turl_logger.error(msg=str(err), extra={"response_code": 500})
+                    turl_logger.error(
+                        msg=str(err), stack_info=True, extra={"response_code": 500}
+                    )
                     return JSONResponse(
                         content="Internal Server Error", status_code=500
                     )
