@@ -10,22 +10,25 @@ from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
+from tinyurl.create_user import create_user_record
 from tinyurl.delete_url import delete_encoded_url
+from tinyurl.delete_user import delete_user_record
 from tinyurl.exception_handling import ExceptionRoute
 from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
 app = FastAPI()
+
 router = APIRouter(route_class=ExceptionRoute)
 
 
 class CreateUser(BaseModel):
-    name: str
+    user_name: str
     email: str
 
 
 class DeleteUser(BaseModel):
-    user_id: int
+    user_id: str
     email: str
 
 
@@ -61,16 +64,22 @@ def delete_url(request: DeleteURL):
 
 @router.post("/v1/create-user")
 def create_user(request: CreateUser):
-    print(request)
-    ## seperate module
-    return {"Confirmed": request}
+    user_record_created = create_user_record(request.user_name, request.email)
+    turl_logger.info(
+        msg="Request Processed", extra={**request.dict(), "response_code": 200}
+    )
+
+    return {"msg": f"Resource Created {user_record_created}"}
 
 
-@router.post("/v1/delete-user")
+@router.delete("/v1/delete-user")
 def delete_user(request: DeleteUser):
-    print(request)
-    ## seperate module
-    return {"Confirmed": request}
+    record_deleted = delete_user_record(request.user_id, request.email)
+    turl_logger.info(
+        msg="Request Processed", extra={**request.dict(), "response_code": 200}
+    )
+
+    return {"msg": f"Resource Deleted {record_deleted}"}
 
 
 @router.get("/{shortkey}")
