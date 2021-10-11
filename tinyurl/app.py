@@ -14,6 +14,8 @@ from tinyurl.create_user import create_user_record
 from tinyurl.delete_url import delete_encoded_url
 from tinyurl.delete_user import delete_user_record
 from tinyurl.exception_handling import ExceptionRoute
+from tinyurl.get_api_dev_key import get_user_apidevkey
+from tinyurl.key_redirect import get_original_url
 from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
@@ -65,11 +67,14 @@ def delete_url(request: DeleteURL):
 @router.post("/v1/create-user")
 def create_user(request: CreateUser):
     user_record_created = create_user_record(request.user_name, request.email)
+    user_api_dev_key = get_user_apidevkey(request.user_name, request.email)
     turl_logger.info(
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
 
-    return {"msg": f"Resource Created {user_record_created}"}
+    return {
+        "msg": f"Resource Created {user_record_created} and user api_dev_key is {user_api_dev_key}"
+    }
 
 
 @router.delete("/v1/delete-user")
@@ -84,10 +89,12 @@ def delete_user(request: DeleteUser):
 
 @router.get("/{shortkey}")
 def read_tinyurl(shortkey: str):
-    print(shortkey)
-    ## seperate module
-    ##ToDo
-    return {"Confirmed": "Redirecting to original link"}
+    original_url = get_original_url(shortkey)
+    turl_logger.info(
+        msg=f"Redirected to original url {original_url}",
+        extra={"short_key": shortkey, "response_code": 200},
+    )
+    return original_url
 
 
 app.include_router(router)
