@@ -5,29 +5,18 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from data.models import URL, USERS
 
+SQLALCHEMY_DATABASE_URL = "sqlite:///./data/TinyURL.sqlite"
 
-class SQLiteSession:
-    def __init__(self, path: str = "./data/TinyURL.sqlite") -> None:
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
 
-        if os.path.exists(path):
-            self.__engine = create_engine("sqlite:///" + path)
-        else:
-            raise FileNotFoundError
-
-        session = sessionmaker(bind=self.__engine)
-        self.__session = session()
-
-    @property
-    def connection_string(self) -> Session:
-        return self.__session
-
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 if __name__ == "__main__":
 
-    db_session = SQLiteSession().connection_string
-    records = db_session.query(USERS).filter(
-        USERS.ApiDevKey == "1d5997a5-0d7d-41e3-8de6-73ea144183e6"
-    )
+    db_session = SessionLocal()
+    records = db_session.query(USERS).all()
     for row in records:
         print(row)
 

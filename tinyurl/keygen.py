@@ -4,7 +4,7 @@ from typing import Optional
 from fastapi import HTTPException
 from hashids import Hashids
 
-from data.database import SQLiteSession
+from data.database import SessionLocal
 from data.models import URL, USERS
 from tinyurl.exception_handling import DataError
 from tinyurl.logging import turl_logger
@@ -14,7 +14,7 @@ MIN_LENGTH = 8
 
 def get_username_id(api_dev_key: str) -> USERS:
 
-    db_session = SQLiteSession().connection_string
+    db_session = SessionLocal()
     record = db_session.query(USERS).filter(api_dev_key == api_dev_key).all()
     db_session.close()
     if not record:
@@ -25,7 +25,7 @@ def get_username_id(api_dev_key: str) -> USERS:
 
 def dump_to_database(user_id: str, unique_key: str, original_url: str) -> bool:
 
-    db_session = SQLiteSession().connection_string
+    db_session = SessionLocal()
     one_url = URL(EncodedURL=unique_key, OriginalURL=original_url, UserID=user_id)
     db_session.add(one_url)
     db_session.commit()
