@@ -4,8 +4,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from data.models import URL, USERS
+from settings import Settings
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./data/TinyURL.sqlite"
+SQLALCHEMY_DATABASE_URL = Settings.DB_URL
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
