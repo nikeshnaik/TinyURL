@@ -104,7 +104,7 @@ def read_tinyurl(shortkey: str):
         msg=f"Redirected to original url {original_url}",
         extra={"short_key": shortkey, "response_code": 200},
     )
-    html = f"<script>windows.location.replace(original_url)</script>"
+    html = f"<script>window.location.replace({original_url})</script>"
     return HTMLResponse(html, status_code=302)
 
 
