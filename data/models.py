@@ -57,6 +57,32 @@ class USERS(Base):
         )
 
 
+def insert_data():
+    ## Creation of Tables
+    engine = create_engine("sqlite:///./data/TinyURL.sqlite")
+    session = sessionmaker()
+    session.configure(bind=engine)
+    Base.metadata.create_all(engine)
+    #
+    ## Insertions
+    session = session()
+    one_url = URL(
+        EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
+    )
+    one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
+
+    print(one_user)
+    session.add(one_user)
+    session.add(one_url)
+    session.commit()
+
+    for row in session.query(URL).order_by(URL.EncodedURL):
+        print(row)
+
+    for row in session.query(USERS).order_by(USERS.UserID):
+        print(row)
+
+
 if __name__ == "__main__":
 
     ## Creation of Tables
@@ -67,16 +93,16 @@ if __name__ == "__main__":
     #
     ## Insertions
     session = session()
-    # one_url = URL(
-    # EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
-    # )
-    # one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
-
-    # print(one_user)
-    # session.add(one_user)
-    # session.add(one_url)
-    # session.commit()
-
+    #     one_url = URL(
+    #     EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
+    #     )
+    #     one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
+    #
+    #     print(one_user)
+    #     session.add(one_user)
+    #     session.add(one_url)
+    #     session.commit()
+    #
     for row in session.query(URL).order_by(URL.EncodedURL):
         print(row)
 

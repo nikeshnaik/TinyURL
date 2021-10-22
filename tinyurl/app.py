@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
+from data.models import insert_data
 from tinyurl.create_user import create_user_record
 from tinyurl.delete_url import delete_encoded_url
 from tinyurl.delete_user import delete_user_record
@@ -20,6 +21,7 @@ from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
 app = FastAPI()
+insert_data()
 
 router = APIRouter(route_class=ExceptionRoute)
 
