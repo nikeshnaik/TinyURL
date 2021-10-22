@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
@@ -6,7 +7,7 @@ import uvicorn
 from dateutil.relativedelta import relativedelta
 from fastapi import Depends, FastAPI
 from fastapi.requests import Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
@@ -21,7 +22,14 @@ from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
 app = FastAPI()
-insert_data()
+
+
+@app.on_event("startup")
+async def startup_event():
+    if os.path.exists("./data/TinyURL.sqlite"):
+        os.remove("./data/TinyURL.sqlite")
+    insert_data()
+
 
 router = APIRouter(route_class=ExceptionRoute)
 
@@ -96,7 +104,8 @@ def read_tinyurl(shortkey: str):
         msg=f"Redirected to original url {original_url}",
         extra={"short_key": shortkey, "response_code": 200},
     )
-    return original_url
+    html = f"<script>windows.location.replace(original_url)</script>"
+    return HTMLResponse(html, status_code=302)
 
 
 app.include_router(router)
