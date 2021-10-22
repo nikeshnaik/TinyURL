@@ -7,7 +7,7 @@ import uvicorn
 from dateutil.relativedelta import relativedelta
 from fastapi import Depends, FastAPI
 from fastapi.requests import Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
@@ -104,8 +104,10 @@ def read_tinyurl(shortkey: str):
         msg=f"Redirected to original url {original_url}",
         extra={"short_key": shortkey, "response_code": 200},
     )
-    html = f"<script>window.location.replace({original_url})</script>"
-    return HTMLResponse(html, status_code=302)
+    #html = f"<script>window.location.replace({original_url})</script>"
+    html = f"<head><meta http-equiv='Refresh' content='0; URL={original_url}'></head>"
+
+    return RedirectResponse(original_url)
 
 
 app.include_router(router)
