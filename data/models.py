@@ -14,6 +14,8 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import backref, relationship, sessionmaker
 
+from settings import Settings
+
 Base = declarative_base()
 
 
@@ -59,16 +61,14 @@ class USERS(Base):
 
 def insert_data():
     ## Creation of Tables
-    engine = create_engine("sqlite:///./data/TinyURL.sqlite")
+    engine = create_engine(Settings.DB_URL)
     session = sessionmaker()
     session.configure(bind=engine)
     Base.metadata.create_all(engine)
     #
     ## Insertions
     session = session()
-    one_url = URL(
-        EncodedURL="asdfae2", OriginalURL="https://www.hello.com", UserID=1412
-    )
+    one_url = URL(EncodedURL="asdfae2", OriginalURL="https://www.hello.com")
     one_user = USERS(Name="John Doe", Email="john.doe@xmen.com")
 
     print(one_user)
@@ -86,7 +86,7 @@ def insert_data():
 if __name__ == "__main__":
 
     ## Creation of Tables
-    engine = create_engine("sqlite:///./data/TinyURL.sqlite")
+    engine = create_engine(Settings.DB_URL)
     session = sessionmaker()
     session.configure(bind=engine)
     # Base.metadata.create_all(engine)
