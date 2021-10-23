@@ -26,9 +26,13 @@ app = FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
-    if os.path.exists("./data/TinyURL.sqlite"):
-        os.remove("./data/TinyURL.sqlite")
-    insert_data()
+    try:
+        insert_data()
+    except Exception as e:
+        print(e)
+        turl_logger.error(
+            msg="Error at inserting data at startup of app", stack_info=True
+        )
 
 
 router = APIRouter(route_class=ExceptionRoute)
@@ -104,7 +108,7 @@ def read_tinyurl(shortkey: str):
         msg=f"Redirected to original url {original_url}",
         extra={"short_key": shortkey, "response_code": 200},
     )
-    #html = f"<script>window.location.replace({original_url})</script>"
+    # html = f"<script>window.location.replace({original_url})</script>"
     html = f"<head><meta http-equiv='Refresh' content='0; URL={original_url}'></head>"
 
     return RedirectResponse(original_url)
