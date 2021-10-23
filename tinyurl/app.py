@@ -24,17 +24,6 @@ from tinyurl.logging import turl_logger
 app = FastAPI()
 
 
-@app.on_event("startup")
-async def startup_event():
-    try:
-        insert_data()
-    except Exception as e:
-        print(e)
-        turl_logger.error(
-            msg="Error at inserting data at startup of app", stack_info=True
-        )
-
-
 router = APIRouter(route_class=ExceptionRoute)
 
 
