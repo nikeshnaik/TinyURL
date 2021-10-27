@@ -10,7 +10,7 @@ Currently Deployed on Heroku with Swagger UI: (https://www.cloned-link.com/)
 
 ##### Irony is Domain Name is itself longer. &#128513; 
 
-![Tiny URL v1](/docs/assets/TinyURL_Pythonv1.jpeg "Tiny URL Arch v1")
+![Tiny URL v2](/docs/assets/TinyURL_Pythonv1.jpeg "Tiny URL Arch v1")
 
 
 ![System API v1](/docs/assets/system_api.png "System API v1")
