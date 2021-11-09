@@ -21,7 +21,22 @@ from tinyurl.key_redirect import get_original_url
 from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+origins = [
+        "https://www.cloned-link.com",
+        "www.cloned-link.com"
+        ]
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
+        )
 
 
 router = APIRouter(route_class=ExceptionRoute)
