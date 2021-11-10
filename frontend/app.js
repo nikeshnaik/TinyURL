@@ -63,7 +63,7 @@ function getLongURL(longurl) {
 
         }).then(response => response.json()).then(data => { console.log({ "Success": data }) }).then(err => { console.error({ 'err': err }) })
 
-        console.log(response)
+        // console.log(response)
         console.log(data)
         encodeURI = data["msg"]
         
