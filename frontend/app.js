@@ -51,9 +51,8 @@ function getLongURL(longurl) {
         }
 
         backend_server_url = "https://www.cloned-link.com"
-        fetch(backend_server_url + "/v1/encode-url/", {
+        const response = await fetch(backend_server_url + "/v1/encode-url/", {
             method: 'POST',
-            credentials:true,
             headers: {
                 'Content-Type': 'application/json',
 
@@ -61,11 +60,11 @@ function getLongURL(longurl) {
             },
             body: JSON.stringify(post_data)
 
-        }).then(response => response.json()).then(data => { console.log({ "Success": data }) }).then(err => { console.error({ 'err': err }) })
+        }).then(data => { console.log({ "Success": data }) }).then(err => { console.error({ 'err': err }) })
 
-        // console.log(response)
-        console.log(data)
-        encodeURI = data["msg"]
+        console.log(response.json())
+        // console.log(data)
+        encodedURL = response["msg"]
         
 
 
