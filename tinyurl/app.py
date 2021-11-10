@@ -11,7 +11,7 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field  # type: ignore
 
-from data.models import insert_data
+from data.models import Base, insert_data
 from tinyurl.create_user import create_user_record
 from tinyurl.delete_url import delete_encoded_url
 from tinyurl.delete_user import delete_user_record
@@ -24,10 +24,14 @@ from tinyurl.logging import turl_logger
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware import Middleware
 from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
 app = FastAPI()
 
-app.mount("/", StaticFiles(directory="/app/./frontend", html=True), name="static")
+Base_dir = Path(__name__).resolve().parent
+print(Path(Base_dir,"./frontend"),)
+
+app.mount("/", StaticFiles(directory=Path(Base_dir,"./frontend"), html=True), name="static")
 
 origins = [
         "https://cloned-link.com/",
