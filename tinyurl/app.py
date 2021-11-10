@@ -22,6 +22,7 @@ from tinyurl.keygen import generate_short_key
 from tinyurl.logging import turl_logger
 
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware import Middleware
 
 app = FastAPI()
 
