@@ -29,7 +29,6 @@ from pathlib import Path
 app = FastAPI()
 
 Base_dir = Path(__name__).resolve().parent
-print(Path(Base_dir,"./frontend"),)
 
 app.mount("/", StaticFiles(directory=Path(Base_dir,"./frontend"), html=True), name="static")
 
@@ -39,7 +38,7 @@ origins = [
         "http://localhost",
         "http://localhost:8080",
         "http://127.0.0.1:5000", 
-        "http://127.0.0.1:5000/",
+        "http://127.0.0.1:5000/"
 
         ]
 
