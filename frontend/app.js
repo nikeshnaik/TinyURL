@@ -51,8 +51,9 @@ function getLongURL(longurl) {
         }
 
         backend_server_url = "https://www.cloned-link.com"
-        fetch(backend_server_url + "/v1/encode-url", {
+        fetch(backend_server_url + "/v1/encode-url/", {
             method: 'POST',
+            credentials:true,
             headers: {
                 'Content-Type': 'application/json',
 

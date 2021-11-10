@@ -40,7 +40,7 @@ origins = [
         "http://localhost:8080",
         "http://127.0.0.1:5000", 
         "http://127.0.0.1:5000/",
-        "http://104.21.82.147:443"  
+
         ]
 
 app.add_middleware(
@@ -83,7 +83,7 @@ def create_tinyurl(request: CreateTinyURL):
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
 
-    return {"msg": f"Resource Created {unique_key}"}
+    return {"msg": unique_key}
 
 
 @router.delete("/v1/delete-url")
