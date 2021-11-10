@@ -27,7 +27,8 @@ app = FastAPI()
 
 origins = [
         "https://www.cloned-link.com",
-        "www.cloned-link.com"
+        "www.cloned-link.com",
+        "localhost"
         ]
 
 app.add_middleware(
