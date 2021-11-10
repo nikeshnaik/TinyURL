@@ -49,7 +49,7 @@ function getLongURL(longurl) {
             api_dev_key: "6f41c86d-2622-4752-80aa-8d28849aeb1d",
             original_url: longurl
         }
-        encodedURL = None;
+        var encodedURL;
         backend_server_url = "https://www.cloned-link.com"
         fetch(backend_server_url + "/v1/encode-url/", {
             method: 'POST',
