@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.74rem;
+  box-sizing: border-box;
+  padding: 3rem;
+  color: white;
+}
+
+.header {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(247, 230, 193, 0.8),
+      rgba(39, 63, 55, 0.8)
+    ),
+    url(img/background_image.jpg);
+  height: 95vh;
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+}
+
+.header__logo-box {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  height: 3.5rem;
+}
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.heading-primary {
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+}
+
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3rem;
+  margin-bottom: inherit;
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1rem;
+}
+
+.input-text {
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  box-shadow: 1 1rem 2rem rgba(0, 0, 0, 0);
+  position: relative;
+  font-size: 1.6rem;
+}
+
+.btn {
+  margin-left: 1rem;
+  display: inline-block;
+  padding: 1rem 1rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  position: relative;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  content: "";
+  background-color: lightgreen;
+}
+
+.btn:hover {
+  transform: translateY(-0.1rem);
+}
+
+.shorten-link {
+  display: block;
+  padding: 4rem 4rem;
+  font-size: 2rem;
+  position: relative;
+  list-style: none;
+  font-weight: 400;
+}
+
+.shorten-link--primary {
+  padding: 2rem 20rem;
+  display: inline-block;
+  background-color: white;
+  color: black;
+  border-radius: 0.4rem;
+  
+}
+
+.btn--copy {
+  display: inline-block;
+  padding: 1rem 1rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  content: "";
+  background-color: white;
+  box-shadow: 1 1rem 2rem rgba(0, 0, 0, 0);
+  
+}
+
