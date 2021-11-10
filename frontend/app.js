@@ -43,7 +43,7 @@ document.getElementsByClassName("input-text")[0].addEventListener("keyup", onEnt
 
 
 
-async function getLongURL(longurl) {
+function getLongURL(longurl) {
     if (longurl) {
         const post_data = {
             api_dev_key: "6f41c86d-2622-4752-80aa-8d28849aeb1d",
@@ -51,7 +51,7 @@ async function getLongURL(longurl) {
         }
 
         backend_server_url = "https://www.cloned-link.com"
-        const response = await fetch(backend_server_url + "/v1/encode-url/", {
+        fetch(backend_server_url + "/v1/encode-url/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,11 +60,10 @@ async function getLongURL(longurl) {
             },
             body: JSON.stringify(post_data)
 
-        }).then(data => { console.log({ "Success": data }) }).then(err => { console.error({ 'err': err }) })
+        }).then(response => {response.json()}).then(data => { encodedURL = data }).then(err => { console.error({ 'err': err }) })
 
-        console.log(response.json())
-        // console.log(data)
-        encodedURL = response["msg"]
+        console.log(encodedURL)
+        encodedURL = encodedURL["msg"]
         
 
 
@@ -74,6 +73,6 @@ async function getLongURL(longurl) {
         document.getElementsByClassName("shorten-link--primary")[0].style.display = 'inline-block'
 
 
-        document.getElementsByClassName('')
+        // document.getElementsByClassName('')
     }
 }
