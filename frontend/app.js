@@ -43,7 +43,7 @@ document.getElementsByClassName("input-text")[0].addEventListener("keyup", onEnt
 
 
 
-function getLongURL(longurl) {
+async function getLongURL(longurl) {
     if (longurl) {
         const post_data = {
             api_dev_key: "6f41c86d-2622-4752-80aa-8d28849aeb1d",
