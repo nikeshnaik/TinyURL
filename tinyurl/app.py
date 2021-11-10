@@ -27,7 +27,7 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
+app.mount("/", StaticFiles(directory="./frontend", html=True), name="static")
 
 origins = [
         "https://cloned-link.com/",
