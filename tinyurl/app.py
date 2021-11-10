@@ -23,14 +23,20 @@ from tinyurl.logging import turl_logger
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware import Middleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
+app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
+
 origins = [
-        "https://www.cloned-link.com",
-        "www.cloned-link.com",
+        "https://cloned-link.com/",
+        "http://cloned-link.com",
         "http://localhost",
-        "http://localhost:8080"
+        "http://localhost:8080",
+        "http://127.0.0.1:5000", 
+        "http://127.0.0.1:5000/",
+        "http://104.21.82.147:443"  
         ]
 
 app.add_middleware(
@@ -117,6 +123,7 @@ def read_tinyurl(shortkey: str):
     )
     # html = f"<script>window.location.replace({original_url})</script>"
     html = f"<head><meta http-equiv='Refresh' content='0; URL={original_url}'></head>"
+
 
     return RedirectResponse(original_url)
 
