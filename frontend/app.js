@@ -53,14 +53,15 @@ function getLongURL(longurl) {
         backend_server_url = "https://www.cloned-link.com"
         fetch(backend_server_url + "/v1/encode-url/", {
             method: 'POST',
+            mode:'cors',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
 
 
             },
             body: JSON.stringify(post_data)
 
-        }).then(response => {response.json()}).then(data => { encodedURL = data }).then(err => { console.error({ 'err': err }) })
+        }).then(response => response.json()).then(data => encodedURL = data)
 
         console.log(encodedURL)
         encodedURL = encodedURL["msg"]
