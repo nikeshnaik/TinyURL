@@ -54,6 +54,9 @@ function getLongURL(longurl) {
         fetch(backend_server_url + "/v1/encode-url/", {
             method: 'POST',
             mode:'cors',
+
+            credentials: "same-origin",
+            
             headers: {
                 'Content-Type': 'application/json'
 
