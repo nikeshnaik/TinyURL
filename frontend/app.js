@@ -55,7 +55,7 @@ function getLongURL(longurl) {
             method: 'POST',
             mode:'cors',
 
-            credentials: true,
+            credentials: "same-origin",
 
             headers: {
                 'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ function getLongURL(longurl) {
             },
             body: JSON.stringify(post_data)
 
-        }).then(response => response.json()).then(data => encodedURL = data)
+        }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
 
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
