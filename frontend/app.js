@@ -55,8 +55,8 @@ function getLongURL(longurl) {
             method: 'POST',
             mode:'cors',
 
-            credentials: "same-origin",
-            
+            credentials: true,
+
             headers: {
                 'Content-Type': 'application/json'
 
