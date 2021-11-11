@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
+from pydantic.types import Json
 
 import uvicorn
 from dateutil.relativedelta import relativedelta
@@ -82,7 +83,9 @@ def create_tinyurl(request: CreateTinyURL):
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
 
-    return {"msg": unique_key}
+    response = JSONResponse(content={"msg": unique_key})
+
+    return response
 
 
 @router.delete("/v1/delete-url")
