@@ -83,7 +83,7 @@ def create_tinyurl(request: CreateTinyURL):
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
 
-    response = JSONResponse(content={"msg": unique_key})
+    response = JSONResponse(content={"msg": unique_key}, headers={"Content-Type": "application/json", "Referrer-Policy":"strict-origin-when-cross-origin"})
 
     return response
 
