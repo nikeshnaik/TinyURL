@@ -33,23 +33,23 @@ Base_dir = Path(__name__).resolve().parent
 
 app.mount("/", StaticFiles(directory=Path(Base_dir,"./frontend"), html=True), name="static")
 
-# origins = [
-#         "https://cloned-link.com/",
-#         "http://cloned-link.com",
-#         "http://localhost",
-#         "http://localhost:8080",
-#         "http://127.0.0.1:5000", 
-#         "http://127.0.0.1:5000/"
+origins = [
+        # "https://cloned-link.com/",
+        # "http://cloned-link.com",
+        # "http://localhost",
+        # "http://localhost:8080",
+        # "http://127.0.0.1:5000", 
+        # "http://127.0.0.1:5000/"
+        "*"
+        ]
 
-#         ]
-
-# app.add_middleware(
-#         CORSMiddleware,
-#         allow_origins=origins,
-#         allow_credentials=True,
-#         allow_methods=["*"],
-#         allow_headers=["*"]
-#         )
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
+        )
 
 
 router = APIRouter(route_class=ExceptionRoute)
