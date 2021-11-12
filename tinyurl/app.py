@@ -52,7 +52,7 @@ app.add_middleware(
         )
 
 
-router = APIRouter(route_class=ExceptionRoute)
+router = APIRouter()
 
 
 class CreateUser(BaseModel):
@@ -83,7 +83,7 @@ def create_tinyurl(request: CreateTinyURL):
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
 
-    response = JSONResponse(content={"msg": unique_key}, headers={"Content-Type": "application/json"})
+    response = JSONResponse(content={"msg": unique_key}, headers={"Content-Type": "application/json", "Access-Control-Allow-Methods": "POST"})
 
     return response
 
