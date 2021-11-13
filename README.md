@@ -1,6 +1,6 @@
 # TinyURL v1
 
-Currently Deployed on Heroku with Swagger UI: (https://www.cloned-link.com/) 
+Currently Deployed on Heroku with Swagger UI: (https://api.cloned-link.com/) 
 
 ### Usage:
 
