@@ -44,16 +44,18 @@ document.getElementsByClassName("input-text")[0].addEventListener("keyup", onEnt
 
 
 function getLongURL(longurl) {
+    var encodedURL = null;
     if (longurl) {
         const post_data = {
             api_dev_key: "6f41c86d-2622-4752-80aa-8d28849aeb1d",
             original_url: longurl
         }
-        var encodedURL;
-        backend_server_url = "https://www.cloned-link.com";
-        fetch(backend_server_url + "/v1/encode-url/", {
+        
+        backend_server_url = "https://www.cloned-link.com/v1/encode-url";
+        fetch(backend_server_url, {
             method: 'POST',
             mode:'cors',
+            redirect:"follow",
 
 
             headers: {
