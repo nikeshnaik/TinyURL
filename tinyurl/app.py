@@ -82,15 +82,7 @@ def create_tinyurl(request: CreateTinyURL):
         msg="Request Processed", extra={**request.dict(), "response_code": 200}
     )
 
-    response = JSONResponse(
-        content={"msg": unique_key},
-        headers={
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Methods": "post",
-        },
-    )
-
-    return response
+    return {"msg": unique_key}
 
 
 @router.delete("/delete-url")
