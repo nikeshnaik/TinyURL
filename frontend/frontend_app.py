@@ -7,11 +7,12 @@ from fastapi import Depends, FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from data.models import Base
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None)
 
 Base_dir = Path(__name__).resolve().parent
 origins = [
-    "https://cloned-link.com/",
+    "https://www.cloned-link.com/",
+    "https://app.cloned-link.com/"
     # "http://cloned-link.com",
     # "http://localhost",
     # "http://localhost:8080",

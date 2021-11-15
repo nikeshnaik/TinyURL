@@ -51,7 +51,7 @@ function getLongURL(longurl) {
             original_url: longurl
         }
         
-        backend_server_url = "https://www.cloned-link.com/v1/encode-url";
+        backend_server_url = "https://api.cloned-link.com/v1/encode-url";
         fetch(backend_server_url, {
             method: 'POST',
             mode:'cors',

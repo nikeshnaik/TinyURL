@@ -33,13 +33,8 @@ app = FastAPI()
 
 Base_dir = Path(__name__).resolve().parent
 origins = [
-    "https://cloned-link.com/",
-    # "http://cloned-link.com",
-    # "http://localhost",
-    # "http://localhost:8080",
-    # "http://127.0.0.1:5000",
-    # "http://127.0.0.1:5000/"
-    # "*"
+    "https://www.cloned-link.com/",
+    "https://api.cloned-link.com/"
 ]
 
 app.add_middleware(
