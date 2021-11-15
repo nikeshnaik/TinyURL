@@ -1,1 +1,2 @@
-web: uvicorn tinyurl.app:app --host=0.0.0.0 --port=${PORT:-8000}
+api: uvicorn tinyurl.app:app --host=0.0.0.0 --port=${PORT:-8000}
+web: uvicorn frontend.frontend_app:app --host=0.0.0.0 --port=${PORT:-8000}
