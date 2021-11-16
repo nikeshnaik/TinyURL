@@ -11,7 +11,7 @@ html {
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  line-height: 1.74rem;
+  line-height: 1.74;
   box-sizing: border-box;
   padding: 3rem;
   color: white;
@@ -56,15 +56,15 @@ body {
 }
 
 .heading-primary--main {
-  display: block;
+  display: inline-block;
   font-size: 6rem;
   font-weight: 400;
-  letter-spacing: 3rem;
+  letter-spacing: 0.3rem;
   margin-bottom: inherit;
 }
 
 .heading-primary--sub {
-  display: block;
+  display: inline-block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1rem;
@@ -105,7 +105,7 @@ body {
 }
 
 #shorten-link--primary {
-  padding: 2rem 20rem;
+  padding: 2rem 10rem;
   display: inline-block;
   background-color: white;
   color: black;

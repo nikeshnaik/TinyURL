@@ -1,5 +1,6 @@
 document.getElementById("shorten-link--primary").style.display = 'none'
 document.getElementsByClassName("btn--copy")[0].style.display = 'none'
+let decorator = document.getElementById("shorten-link--primary").textContent
 
 
 
@@ -21,6 +22,7 @@ function onEnterTextbox(event) {
         longurl = document.getElementsByClassName("input-text")[0].value
         console.log(longurl)
         getLongURL(longurl)
+        longurl = null  
     }
 
 
@@ -28,19 +30,33 @@ function onEnterTextbox(event) {
 
 function cleanUpText() {
     document.getElementsByClassName("input-text")[0].value = ""
+
 }
 
 function copyText(event) {
     textarea_element = document.getElementById("shorten-link--primary")
     navigator.clipboard.writeText(textarea_element.textContent).then(function () {
-        document.getElementsByClassName("btn--copy")[0].textContent = "Copied!!!"
+        document.getElementsByClassName("btn--copy")[0].textContent = "Copied!!"
         cleanUpText()
+
+        
     })
+}
+
+function resetNewState(event){
+    textarea_element = document.getElementById("shorten-link--primary")
+    textarea_element.textContent = decorator
+    textarea_element.style.display = "none"
+    document.getElementsByClassName("btn--copy")[0].textContent = "Copy"
+    document.getElementsByClassName("btn--copy")[0].style.display = 'none'
 }
 
 document.getElementsByClassName("btn--copy")[0].addEventListener("click", copyText)
 document.getElementsByClassName("btn")[0].addEventListener("click", generateLink)
 document.getElementsByClassName("input-text")[0].addEventListener("keyup", onEnterTextbox)
+document.getElementsByClassName("input-text")[0].addEventListener("input", resetNewState)
+
+
 
 
 
@@ -72,7 +88,6 @@ async function getLongURL(longurl) {
 
 
         document.getElementsByClassName("btn--copy")[0].style.display = 'inline-block'
-        decorator = document.getElementById("shorten-link--primary").textContent
         document.getElementById("shorten-link--primary").textContent = decorator + encodedURL
         document.getElementById("shorten-link--primary").style.display = 'inline-block'
 
