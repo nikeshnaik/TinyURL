@@ -13,7 +13,8 @@ app = FastAPI(docs_url=None, redoc_url=None)
 Base_dir = Path(__name__).resolve().parent
 origins = [
     "https://www.cloned-link.com",
-    "https://api.cloned-link.com"
+    "https://api.cloned-link.com",
+    "https://app.cloned-link.com"
     # "http://cloned-link.com",
     # "http://localhost",
     # "http://localhost:8080",
