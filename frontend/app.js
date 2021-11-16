@@ -75,8 +75,7 @@ async function getLongURL(longurl) {
         backend_server_url = "https://www.cloned-link.com/v1/encode-url";
         let response = await fetch(backend_server_url, {
             method: 'POST',
-            mode:"cors",
-            referrerPolicy:"origin-when-cross-origin",
+            mode:"same-origin",
             headers: {
                 'Content-Type': 'application/json'
 
