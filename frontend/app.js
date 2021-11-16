@@ -2,6 +2,7 @@ document.getElementById("shorten-link--primary").style.display = 'none'
 document.getElementsByClassName("btn--copy")[0].style.display = 'none'
 let decorator = document.getElementById("shorten-link--primary").textContent
 
+var encodedURL = "";
 
 
 
@@ -64,7 +65,7 @@ document.getElementsByClassName("input-text")[0].addEventListener("input", reset
 
 
 async function getLongURL(longurl) {
-    var encodedURL = "";
+    
     if (longurl) {
         const post_data = {
             api_dev_key: "6f41c86d-2622-4752-80aa-8d28849aeb1d",
