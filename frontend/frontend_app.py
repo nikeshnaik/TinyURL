@@ -5,6 +5,7 @@ from typing import Optional
 import uvicorn
 from fastapi import Depends, FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 from data.models import Base
 app = FastAPI(docs_url=None, redoc_url=None)
