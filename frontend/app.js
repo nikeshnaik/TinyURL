@@ -1,8 +1,8 @@
 document.getElementById("shorten-link--primary").style.display = 'none'
 document.getElementsByClassName("btn--copy")[0].style.display = 'none'
-let decorator = document.getElementById("shorten-link--primary").textContent
+var decorator = document.getElementById("shorten-link--primary").textContent
 
-let encodedURL = "";
+var encodedURL = "";
 
 
 
@@ -83,12 +83,11 @@ async function getLongURL(longurl) {
             body: JSON.stringify(post_data)
         })
 
-        let encodedURL = await response.json()
+        encodedURL = await response.json()
 
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
         
-
 
 
         document.getElementsByClassName("btn--copy")[0].style.display = 'inline-block'
