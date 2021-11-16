@@ -44,7 +44,7 @@ document.getElementsByClassName("input-text")[0].addEventListener("keyup", onEnt
 
 
 
-function getLongURL(longurl) {
+async function getLongURL(longurl) {
     var encodedURL = "";
     if (longurl) {
         const post_data = {
@@ -53,7 +53,7 @@ function getLongURL(longurl) {
         }
         
         backend_server_url = "https://www.cloned-link.com/v1/encode-url";
-        fetch(backend_server_url, {
+        let response = await fetch(backend_server_url, {
             method: 'POST',
             mode:"cors",
             headers: {
@@ -61,8 +61,10 @@ function getLongURL(longurl) {
 
             },
             body: JSON.stringify(post_data)
+        })
 
-        }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
+        let encodedURL = await response.json()
+
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
         
