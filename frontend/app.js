@@ -20,7 +20,7 @@ function generateLink(event) {
 
 function onEnterTextbox(event) {
     if (event.which == 13 | event.keyCode == 13) {
-        longurl = document.getElementsByClassName("input-text")[0].value
+        let longurl = document.getElementsByClassName("input-text")[0].value
         console.log(longurl)
         getLongURL(longurl)
         longurl = null  
