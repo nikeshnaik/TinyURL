@@ -63,7 +63,6 @@ function getLongURL(longurl) {
             body: JSON.stringify(post_data)
 
         }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
-        encodedURL = {"msg":"got it "}
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
         
