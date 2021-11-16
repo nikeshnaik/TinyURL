@@ -33,6 +33,7 @@ app = FastAPI()
 
 Base_dir = Path(__name__).resolve().parent
 origins = [
+    "https://cloned-link.com",
     "https://www.cloned-link.com",
     "https://api.cloned-link.com",
     "https://app.cloned-link.com"
@@ -43,7 +44,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
 
