@@ -52,17 +52,17 @@ function getLongURL(longurl) {
             original_url: longurl
         }
         
-        // backend_server_url = "https://www.cloned-link.com/v1/encode-url";
-        // fetch(backend_server_url, {
-        //     method: 'POST',
-        //     mode:"cors",
-        //     headers: {
-        //         'Content-Type': 'application/json'
+        backend_server_url = "https://www.cloned-link.com/v1/encode-url";
+        fetch(backend_server_url, {
+            method: 'POST',
+            mode:"cors",
+            headers: {
+                'Content-Type': 'application/json'
 
-        //     },
-        //     body: JSON.stringify(post_data)
+            },
+            body: JSON.stringify(post_data)
 
-        // }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
+        }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
         encodedURL = {"msg":"got it "}
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
