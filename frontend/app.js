@@ -2,7 +2,7 @@ document.getElementById("shorten-link--primary").style.display = 'none'
 document.getElementsByClassName("btn--copy")[0].style.display = 'none'
 let decorator = document.getElementById("shorten-link--primary").textContent
 
-var encodedURL = "";
+let encodedURL = "";
 
 
 
