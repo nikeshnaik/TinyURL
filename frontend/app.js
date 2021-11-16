@@ -76,6 +76,7 @@ async function getLongURL(longurl) {
         let response = await fetch(backend_server_url, {
             method: 'POST',
             mode:"cors",
+            referrerPolicy:"origin-when-cross-origin",
             headers: {
                 'Content-Type': 'application/json'
 
