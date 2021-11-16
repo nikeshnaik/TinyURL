@@ -12,7 +12,7 @@ app = FastAPI(docs_url=None, redoc_url=None)
 Base_dir = Path(__name__).resolve().parent
 origins = [
     "https://www.cloned-link.com/",
-    "https://app.cloned-link.com/"
+    "https://api.cloned-link.com/"
     # "http://cloned-link.com",
     # "http://localhost",
     # "http://localhost:8080",
@@ -21,6 +21,15 @@ origins = [
     # "*"
 ]
 
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.mount("/", StaticFiles(directory=Base_dir / "frontend", html=True), name="static")
 
 if __name__ == "__main__":
