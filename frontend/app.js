@@ -56,8 +56,6 @@ function getLongURL(longurl) {
             method: 'POST',
             mode:'cors',
             redirect:"follow",
-
-
             headers: {
                 'Content-Type': 'application/json'
 
