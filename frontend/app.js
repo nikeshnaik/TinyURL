@@ -80,7 +80,7 @@ async function getLongURL(longurl) {
                 'Content-Type': 'application/json'
 
             },
-            body: post_data
+            body: JSON.stringify(post_data)
         })
 
         encodedURL = await response.json()
