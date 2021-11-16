@@ -56,7 +56,7 @@ function resetNewState(event){
 }
 
 document.getElementsByClassName("btn--copy")[0].addEventListener("click", copyText)
-document.getElementsByClassName("btn")[0].addEventListener("click", generateLink)
+document.getElementsByClassName("btn")[0].addEventListener("click", generateLink, {"once":true})
 document.getElementsByClassName("input-text")[0].addEventListener("keyup", onEnterTextbox)
 document.getElementsByClassName("input-text")[0].addEventListener("input", resetNewState)
 
