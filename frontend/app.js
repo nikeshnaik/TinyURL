@@ -35,7 +35,10 @@ function cleanUpText() {
 
 function copyText(event) {
     textarea_element = document.getElementById("shorten-link--primary")
-    navigator.clipboard.writeText(textarea_element.textContent).then(function () {
+    short_link = "www.cloned-link.com/"+ encodedURL
+    console.log(short_link)
+    navigator.clipboard.writeText(short_link).then(function () {
+        
         document.getElementsByClassName("btn--copy")[0].textContent = "Copied!!"
         cleanUpText()
 
