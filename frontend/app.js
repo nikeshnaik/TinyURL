@@ -1,4 +1,4 @@
-document.getElementsByClassName("shorten-link--primary")[0].style.display = 'none'
+document.getElementById("shorten-link--primary").style.display = 'none'
 document.getElementsByClassName("btn--copy")[0].style.display = 'none'
 
 
@@ -31,9 +31,10 @@ function cleanUpText() {
 }
 
 function copyText(event) {
-    textarea_element = document.getElementsByClassName("shorten-link--primary")[0]
+    textarea_element = document.getElementById("shorten-link--primary")
     navigator.clipboard.writeText(textarea_element.textContent).then(function () {
         document.getElementsByClassName("btn--copy")[0].textContent = "Copied!!!"
+        cleanUpText()
     })
 }
 
@@ -51,18 +52,18 @@ function getLongURL(longurl) {
             original_url: longurl
         }
         
-        backend_server_url = "https://www.cloned-link.com/v1/encode-url";
-        fetch(backend_server_url, {
-            method: 'POST',
-            mode:"cors",
-            headers: {
-                'Content-Type': 'application/json'
+        // backend_server_url = "https://www.cloned-link.com/v1/encode-url";
+        // fetch(backend_server_url, {
+        //     method: 'POST',
+        //     mode:"cors",
+        //     headers: {
+        //         'Content-Type': 'application/json'
 
-            },
-            body: JSON.stringify(post_data)
+        //     },
+        //     body: JSON.stringify(post_data)
 
-        }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
-
+        // }).then(res => res.json()).then(data => encodedURL = data).then(() => console.log(encodedURL))
+        encodedURL = {"msg":"got it "}
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
         
@@ -70,8 +71,9 @@ function getLongURL(longurl) {
 
 
         document.getElementsByClassName("btn--copy")[0].style.display = 'inline-block'
-        document.getElementsByClassName("shorten-link--primary")[0].textContent = encodedURL
-        document.getElementsByClassName("shorten-link--primary")[0].style.display = 'inline-block'
+        decorator = document.getElementById("shorten-link--primary").textContent
+        document.getElementById("shorten-link--primary").textContent = decorator + encodedURL
+        document.getElementById("shorten-link--primary").style.display = 'inline-block'
 
 
         // document.getElementsByClassName('')
