@@ -28,9 +28,9 @@ origins = [
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 app.mount("/", StaticFiles(directory=Base_dir / "frontend", html=True), name="static")
 
