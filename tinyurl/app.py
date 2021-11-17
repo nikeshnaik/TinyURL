@@ -125,7 +125,7 @@ def read_tinyurl(shortkey: str):
     return RedirectResponse(original_url)
 
 
-app.include_router(router, prefix="/v1")
+app.include_router(router)
 
 print([{"path": route.path, "name": route.name} for route in app.routes])
 
