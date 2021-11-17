@@ -81,6 +81,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  display: block;
 }
 
 .heading-primary {
@@ -109,7 +110,7 @@ body {
   display: inline-block;
   box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 2);
   position: relative;
-  font-size: 1.6rem;
+  font-size: 3rem;
 }
 
 .btn {
@@ -117,7 +118,7 @@ body {
   display: inline-block;
   padding: 1rem 1rem;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 2rem;
   position: relative;
   font-weight: 400;
   border-radius: 0.5rem;
@@ -151,7 +152,7 @@ body {
   display: inline-block;
   padding: 1rem 1rem;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   border-radius: 0.5rem;
   content: "";
