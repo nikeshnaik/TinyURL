@@ -28,7 +28,7 @@ html {
 
 @media only screen and (min-device-width:   320px){
   html{
-  font-size : 25%;
+  font-size : 35%;
   }
 }
 
@@ -126,6 +126,7 @@ body {
   text-transform: uppercase;
   position: relative;
   font-weight: 400;
+  font-size: 2rem;
   border-radius: 0.5rem;
   content: "";
   background-color: lightgreen;
