@@ -8,6 +8,40 @@ html {
   font-size: 62.5%;
 }
 
+html {
+  font-size: 15%;
+}
+
+@media only screen and (min-device-width: 480px){
+  html{
+    font-size: 40%;
+
+  }
+}
+
+
+@media only screen and (min-device-width: 768px){
+  html{
+  font-size : 55%;
+  }
+}
+
+@media only screen and (min-device-width:   320px){
+  html{
+  font-size : 25%;
+  }
+}
+
+@media only screen and (min-device-width: 1024px){
+  html{
+  font-size : 62.5%;
+  }
+}
+
+
+
+
+
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
@@ -56,15 +90,15 @@ body {
 }
 
 .heading-primary--main {
-  display: inline-block;
+  display: block;
   font-size: 6rem;
   font-weight: 400;
   letter-spacing: 0.3rem;
-  margin-bottom: inherit;
+  /* margin-bottom: inherit; */
 }
 
 .heading-primary--sub {
-  display: inline-block;
+  display: block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1rem;
