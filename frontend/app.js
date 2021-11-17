@@ -1,7 +1,8 @@
 document.getElementById("shorten-link--primary").style.display = 'none'
 document.getElementsByClassName("btn--copy")[0].style.display = 'none'
 var decorator = document.getElementById("shorten-link--primary").textContent
-
+var longurl_element = document.getElementsByClassName("input-text")[0]
+var longurl = "";
 var encodedURL = "";
 
 
@@ -19,8 +20,8 @@ function generateLink(event) {
 }
 
 function onEnterTextbox(event) {
-    if (event.which == 13 | event.keyCode == 13) {
-        let longurl = document.getElementsByClassName("input-text")[0].value
+    if ((event.which == 13 || event.keyCode == 13) && (longurl_element.value!==longurl)) {
+        longurl = longurl_element.value
         console.log(longurl)
         getLongURL(longurl).then(console.log)
         
