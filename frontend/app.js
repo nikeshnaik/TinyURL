@@ -22,8 +22,9 @@ function onEnterTextbox(event) {
     if (event.which == 13 | event.keyCode == 13) {
         let longurl = document.getElementsByClassName("input-text")[0].value
         console.log(longurl)
-        getLongURL(longurl)
-        longurl = null  
+        getLongURL(longurl).then(console.log)
+        
+
     }
 
 
