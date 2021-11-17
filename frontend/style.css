@@ -105,12 +105,18 @@ body {
   letter-spacing: 1rem;
 }
 
+.input-box{
+
+  font-size: 3rem;  
+}
+
+
 .input-text {
   padding: 1.5rem 4rem;
   display: inline-block;
   box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 2);
   position: relative;
-  font-size: 3rem;
+  font-size: inherit;
 }
 
 .btn {
@@ -118,7 +124,6 @@ body {
   display: inline-block;
   padding: 1rem 1rem;
   text-transform: uppercase;
-  font-size: 2rem;
   position: relative;
   font-weight: 400;
   border-radius: 0.5rem;
