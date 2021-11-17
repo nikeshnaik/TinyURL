@@ -78,7 +78,8 @@ async function getLongURL(longurl) {
             method: 'POST',
             mode:"cors",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Max-Age' : 600
 
             },
             body: JSON.stringify(post_data)
@@ -88,11 +89,12 @@ async function getLongURL(longurl) {
 
         console.log("encoded data",encodedURL)
         encodedURL = encodedURL["msg"]
+        short_url = "www.cloned-app.com/" + encodedURL
         
 
 
         document.getElementsByClassName("btn--copy")[0].style.display = 'inline-block'
-        document.getElementById("shorten-link--primary").textContent = decorator + encodedURL
+        document.getElementById("shorten-link--primary").textContent = decorator + short_url
         document.getElementById("shorten-link--primary").style.display = 'inline-block'
 
 
